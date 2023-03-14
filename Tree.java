@@ -40,7 +40,8 @@ public class Tree {
     }
   }
 
-  private void inOrder(Node localRoot) {
+  private void inOrder(Node localRoot) // left root right
+  {
     if (localRoot != null) {
       inOrder(localRoot.leftChild);
       localRoot.displayNode();
@@ -48,7 +49,8 @@ public class Tree {
     }
   }
 
-  private void preOrder(Node localRoot) {
+  private void preOrder(Node localRoot) // root left right
+  {
     if (localRoot != null) {
       localRoot.displayNode();
       preOrder(localRoot.leftChild);
@@ -56,12 +58,67 @@ public class Tree {
     }
   }
 
-  private void postOrder(Node localRoot) {
+  private void postOrder(Node localRoot) // left right root
+  {
     if (localRoot != null) {
       postOrder(localRoot.leftChild);
       postOrder(localRoot.rightChild);
       localRoot.displayNode();
     }
+  }
+
+  public void TraversepostOrder() {
+
+    postOrder(root);
+
+  }
+
+  private Node findRescursive(Node localRoot, int empNo) {
+
+    if (localRoot == null) {
+
+      return null;
+
+    } else if (localRoot.empNo == empNo) {
+
+      System.out.println(localRoot.name);
+      return localRoot;
+
+    }
+
+    else if (empNo < localRoot.empNo) {
+
+      return findRescursive(localRoot.leftChild, empNo);
+
+    }
+
+    else {
+
+      return findRescursive(localRoot.rightChild, empNo);
+
+    }
+
+  }
+
+  public Node find(int empNo) {
+    Node current = root;
+    while (current.empNo != empNo) {
+      if (empNo < current.empNo)
+        current = current.leftChild;
+      else
+        current = current.rightChild;
+      if (current == null)
+        return null;
+    }
+
+    System.out.println("Emplyoo name: " + current.name);
+    return current;
+  }
+
+  public void deleteAll() {
+
+    root = null;
+
   }
 
 }
